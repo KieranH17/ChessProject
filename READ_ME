@@ -1,0 +1,9 @@
+# TODO
+change empty board pieces to be "" rather than del
+- involves changing setpieces and making moves
+- or instead of indexing board_dict (i.e. board_dict[key]) use (board_dict.get(key)) which returns None not KeyError
+
+Have buffer board spaces to speed up moves (for AI only make moves linear - 64x - not tuple)
+
+Fix the super function for the pieces
+think of a way to make fake moves - or maybe have a fake game
