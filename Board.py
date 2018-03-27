@@ -94,4 +94,3 @@ class Board:
 
 
 START_INDEX = 26
-

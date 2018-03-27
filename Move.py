@@ -68,7 +68,3 @@ def full_str_to_int_ind(four_char):
 
 def end_inbounds(i, board):
     return board.get_pos(i) != "*"
-
-
-
-

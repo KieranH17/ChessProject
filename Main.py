@@ -1,11 +1,6 @@
 from ChessProject.Game import *
 from ChessProject.Player import *
 
-# Python
-import tensorflow as tf
-hello = tf.constant('Hello, TensorFlow!')
-sess = tf.Session()
-print(sess.run(hello))
 
 class Main:
     def __init__(self):

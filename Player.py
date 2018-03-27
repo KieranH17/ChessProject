@@ -13,6 +13,9 @@ class Player:
     def my_move(self):
         raise NotImplementedError
 
+    def select_promotion(self):
+        raise NotImplementedError
+
 
 class Human(Player):
     def my_move(self):
@@ -27,6 +30,23 @@ class Human(Player):
         except (ValueError, IndexError, KeyError):
             pass
 
+    def select_promotion(self):
+        if self.color == WHITE:
+            print("Which piece would you like to promote to: '♘', '♗', '♖', or '♕'?")
+            print("(Copy paste the exact symbol as input).")
+            prom_choice = input()
+            while prom_choice not in ['♘', '♗', '♖', '♕']:
+                print("Invalid selection. Try again.")
+                prom_choice = input()
+        else:
+            print("Which piece would you like to promote to: '♞', '♝', '♜', or '♛'?")
+            print("(Copy paste the exact symbol as input).")
+            prom_choice = input()
+            while prom_choice not in ['♞', '♝', '♜', '♛']:
+                print("Invalid selection. Try again.")
+                prom_choice = input()
+        return prom_choice
+
 
 class AI(Player):
     def __init__(self, color, game):
@@ -35,14 +55,20 @@ class AI(Player):
 
     def my_move(self):
         game_copy = Game(self.game)
-        self.find_move(True, 3, MIN_INT, MAX_INT, self.color, game_copy)
+        self.find_move(True, 4, MIN_INT, MAX_INT, self.color, game_copy)
         return self.next_best_move
+
+    def select_promotion(self):
+        if self.color == WHITE:
+            return '♕'
+        elif self.color == BLACK:
+            return '♛'
 
     # max player (white), min player (black)
     def find_move(self, save_move, depth, alpha, beta, player, game):
         move_value = 0
         best_move = None
-        legal_moves = game.findLegalMoves()
+        legal_moves = game.findlegalmoves()
         if depth == 0:
             return game.board.heuristic_score()
         if player == WHITE:
@@ -85,4 +111,3 @@ WHITE_OPENING = ["d2-d4", "e2-e4", "b1-c3", "g1-f3", "c1-d2",
                  "c1-e3", "c1-f4", "c1-g5", "f1-e2", "f1-d3", "f1-c4"]
 BLACK_OPENING = ["d7-d5", "e7-e5", "d7-d6", "e7-e6", "b8-c6", "g8-f6", "c8-d7",
                  "c8-e6", "c8-f5", "c8-g4", "f8-e7", "f8-d6", "f8-c5"]
-
